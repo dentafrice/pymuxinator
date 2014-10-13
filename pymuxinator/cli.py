@@ -11,21 +11,34 @@ def main():
 
 
 class CLI(object):
+    valid_commands = (
+        ('start', 'start project',),
+    )
+
     def __init__(self):
         parser = argparse.ArgumentParser(description='Pymuxinator')
-        subparsers = parser.add_subparsers(title='commands', description='valid commands')
+        sub_parsers = parser.add_subparsers(title='commands', description='valid commands')
 
-        # add start
-        start = subparsers.add_parser('start', help='start')
-        start.add_argument('project', help='pymuxinator project to start')
-        start.add_argument('--preview', dest='preview', action='store_true', help='preview tmux commands')
-        start.set_defaults(func=self.start)
+        for command, help_text in self.valid_commands:
+            if hasattr(self, command):
+                sub_parser = sub_parsers.add_parser(command, help=help_text or '')
+
+                # add arguments to sub_parser
+                if hasattr(self, '_' + command):
+                    getattr(self, '_' + command)(sub_parser)
+
+                # set default function for sub_parser
+                sub_parser.set_defaults(func=getattr(self, command))
 
         if len(sys.argv) <= 1:
             parser.print_help()
         else:
             args = parser.parse_args()
             args.func(args)
+
+    def _start(self, parser):
+        parser.add_argument('project', help='pymuxinator project to start')
+        parser.add_argument('--preview', dest='preview', action='store_true', help='preview tmux commands')
 
     def start(self, args):
         project_name = args.project
