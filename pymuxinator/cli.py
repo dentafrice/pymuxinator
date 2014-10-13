@@ -1,8 +1,27 @@
+import argparse
+import sys
+
 import pymuxinator.config as config
 from pymuxinator.project import Project
 from pymuxinator import exceptions, utils
 
+
 class CLI(object):
+    def __init__(self):
+        parser = argparse.ArgumentParser(description='Pymuxinator')
+        subparsers = parser.add_subparsers(title='commands',
+            description='valid commands',
+            help='additional help')
+
+        # add start
+        start = subparsers.add_parser('start', help='start <project>')
+        start.add_argument('project', help='pymuxinator project to start')
+        start.add_argument('--preview', dest='preview', action='store_true', help='preview tmux commands')
+        start.set_defaults(func=self.start)
+
+        args = parser.parse_args()
+        args.func(args)
+
     def start(self, args):
         project_name = args.project
         project = None
