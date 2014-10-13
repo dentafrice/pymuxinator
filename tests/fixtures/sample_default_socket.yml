@@ -1,0 +1,4 @@
+name: sample_default_socket
+tmux_options: "     -f ~/.tmux.testing.conf"
+windows:
+  - # empty

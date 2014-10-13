@@ -1,0 +1,9 @@
+name: sample_custom
+socket_path: /foo/bar
+pre:
+  - foo
+  - bar
+  - baz
+tmux_command: custom
+windows:
+  - #empty window

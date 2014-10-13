@@ -1,0 +1,37 @@
+name: sample
+root: ~/test
+pre: supervisorctl status my_service
+pre_window: source env/bin/activate
+tmux_options: "     -f ~/.tmux.testing.conf"
+socket_name: foo
+windows:
+  - editor:
+      pre:
+        - echo "no pane, no gain!"
+        -
+      layout: main-vertical
+      panes:
+        - vim ~/.foobar.zip # why would you
+        - htop
+        - # empty pane
+        - multi:
+            - ssh foobar.com
+            - echo "hai der"
+  - project:
+    - git branch
+    - git status
+  - split_pane:
+      layout: main-horizontal
+      pre:
+        - echo "first"
+        - echo "second"
+      panes:
+        -
+        - # empty pane
+        -
+  - mongodb: service start wobscale
+  - supervisor: supervisorctl start my_service
+  - uwsgi: tail -f /var/log/uwsgi.log
+  - tailer: tail -f /var/foo
+  - deploy:
+  - server: ssh user@example.com
