@@ -3,7 +3,8 @@ from pymuxinator.project import Project
 from pymuxinator import exceptions, utils
 
 class CLI(object):
-    def start(self, project_name):
+    def start(self, args):
+        project_name = args.project
         project = None
 
         try:
@@ -17,4 +18,9 @@ class CLI(object):
         except exceptions.NoNameError:
             print u"Project `%s` didn't specify a `project_name`." % project_name
         else:
-            utils.execute_cmd(project.render())
+            commands = project.render()
+
+            if args.preview:
+                print commands
+            else:
+                utils.execute_cmd(commands)
