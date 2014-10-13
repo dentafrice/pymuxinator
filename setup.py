@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "pymuxinator",
-    version = "0.0.3",
+    version = "0.0.4",
     author = "Caleb Mingle",
     author_email = "caleb@mingle.cm",
     description = "Tmux session manager",
