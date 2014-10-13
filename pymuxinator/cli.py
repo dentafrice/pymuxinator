@@ -6,6 +6,10 @@ from pymuxinator.project import Project
 from pymuxinator import exceptions, utils
 
 
+def main():
+    cli = CLI()
+
+
 class CLI(object):
     def __init__(self):
         parser = argparse.ArgumentParser(description='Pymuxinator')

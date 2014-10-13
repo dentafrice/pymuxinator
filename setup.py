@@ -11,7 +11,7 @@ setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'pymuxinator = pymuxinator:main',
+            'pymuxinator = pymuxinator.cli:main',
         ],
     },
     tests_require=[
