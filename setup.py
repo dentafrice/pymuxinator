@@ -5,8 +5,8 @@ setup(
     version = "0.0.1",
     author = "Caleb Mingle",
     author_email = "caleb@mingle.cm",
-    description = "Python version of Tmuxinator",
-    url = "http://caleb.io",
+    description = "Tmux session manager",
+    url = "http://mingle.cm",
     packages = find_packages(),
     include_package_data=True,
     entry_points={
