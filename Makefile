@@ -8,6 +8,7 @@ uninstall:
 	rm -f ${DESTDIR}${BINDIR}/pymuxinator
 
 install:
+	python setup.py install
 	${INSTALLDIR} ${DESTDIR}${BINDIR}
 	${INSTALLBIN} ./bin/pymuxinator ${DESTDIR}${BINDIR}
 
