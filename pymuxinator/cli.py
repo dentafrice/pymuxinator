@@ -12,6 +12,7 @@ def main():
 
 class CLI(object):
     valid_commands = (
+        ('commands', 'list commands',),
         ('start', 'start project',),
     )
 
@@ -61,3 +62,10 @@ class CLI(object):
                 print commands
             else:
                 utils.execute_cmd(commands)
+
+    def commands(self, args):
+        commands = list(self.valid_commands)
+        commands = sorted(commands, key=lambda x: x[0])
+
+        for command, help_text in commands:
+            print command
