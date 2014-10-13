@@ -38,10 +38,7 @@ def load(project_name):
             raise exceptions.ConfigParseError(path)
 
 def load_template(template_name):
-    template_name = template_name + u'.template'
-
-    path = os.path.dirname(__file__)
-    path = os.path.abspath(path + u'/../templates/' + template_name)
+    path = '%s/templates/%s.template' % (os.path.dirname(__file__), template_name)
 
     with open(path) as template:
         return Template(template.read())
