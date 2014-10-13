@@ -1,5 +1,6 @@
 import argparse
 import sys
+import os
 
 import pymuxinator.config as config
 from pymuxinator.project import Project
@@ -14,6 +15,7 @@ class CLI(object):
     valid_commands = (
         ('commands', 'list commands',),
         ('start', 'start project',),
+        ('list', 'list all projects',),
     )
 
     def __init__(self):
@@ -69,3 +71,11 @@ class CLI(object):
 
         for command, help_text in commands:
             print command
+
+    def list(self, args):
+        configs = config.list_all()
+
+        for config_file in configs:
+            base = os.path.basename(config_file)
+            print os.path.splitext(base)[0]
+
