@@ -9,8 +9,10 @@ unset RBENV_DIR
 if [ "$?" -eq 1 ]; then
   cd {{ project.root or "." }}
 
-  # Run pre command.
-  {{ project.pre }}
+  {%- if project.pre %}
+    # Run pre command.
+    {{ project.pre }}
+  {%- endif %}
 
   # Create the session and the first window.
   TMUX= {{ project.tmux }} new-session -d -s {{ project.name }} -n {{ project.windows[0].name }}
