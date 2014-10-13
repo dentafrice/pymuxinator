@@ -1,5 +1,4 @@
-import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name = "pymuxinator",
@@ -8,7 +7,13 @@ setup(
     author_email = "caleb@mingle.cm",
     description = "Python version of Tmuxinator",
     url = "http://caleb.io",
-    packages=["pymuxinator", "tests"],
+    packages = find_packages(),
+    include_package_data=True,
+    entry_points={
+        'console_scripts': [
+            'pymuxinator = pymuxinator:main',
+        ],
+    },
     tests_require=[
         "nose>=1.0",
         "mock>=1.0",
