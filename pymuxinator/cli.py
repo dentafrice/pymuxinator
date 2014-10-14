@@ -8,7 +8,17 @@ from pymuxinator import exceptions, utils
 
 
 def main():
-    cli = CLI()
+    CLI(args=sys.argv[1:])
+
+
+def start():
+    args = sys.argv[1:]
+
+    # if it's just `mux api` we want `mux start api`
+    if len(args) >= 1:
+        args = ['start'] + args
+
+    CLI(args=args)
 
 
 class CLI(object):
@@ -18,7 +28,7 @@ class CLI(object):
         ('list', 'list all projects',),
     )
 
-    def __init__(self):
+    def __init__(self, args):
         parser = argparse.ArgumentParser(description='Pymuxinator')
         sub_parsers = parser.add_subparsers(title='commands', description='valid commands')
 
@@ -36,7 +46,7 @@ class CLI(object):
         if len(sys.argv) <= 1:
             parser.print_help()
         else:
-            args = parser.parse_args()
+            args = parser.parse_args(args)
             args.func(args)
 
     def _start(self, parser):

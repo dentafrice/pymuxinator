@@ -12,6 +12,7 @@ setup(
     entry_points={
         'console_scripts': [
             'pymuxinator = pymuxinator.cli:main',
+            'mux = pymuxinator.cli:start',
         ],
     },
     tests_require=[
