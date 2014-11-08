@@ -14,8 +14,18 @@ if [ "$?" -eq 1 ]; then
     {{ project.pre }}
   {%- endif %}
 
-  # Create the session and the first window.
-  TMUX= {{ project.tmux }} new-session -d -s {{ project.name }} -n {{ project.windows[0].name }}
+  # Create the session and a scratch window.
+  TMUX= {{ project.tmux }} new-session -d -s {{ project.name }} -n scratch
+
+  # Copy over the environment variables
+  {%- for key, value in project.environment.iteritems() %}
+    {{ project.tmux }} set-environment -t {{ project.name }} {{ key }} {{ value }}
+  {% endfor %}
+
+  # Create the real first window, swap it with the scratch, and then kill the scratch.
+  {{ project.tmux }} new-window -a -n {{ project.windows[0].name }}
+  {{ project.tmux }} swap-window -s {{ project.name }}:1 -t {{ project.name }}:0
+  {{ project.tmux }} kill-window -t {{ project.name }}:1
 
   # Create other windows.
   {%- for window in project.windows %}

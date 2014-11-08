@@ -52,6 +52,12 @@ class TestSampleProject(FixturedTestCase):
         mock_load_template.return_value = Template('Name: {{ project.name }}')
         self.assertEqual(self.project.render(), 'Name: sample')
 
+    def test_environment(self):
+        self.assertEqual(self.project.environment, {
+            'FOO': 'bar',
+            'BAR': None,
+        })
+
     def test_tmux_command(self):
         self.assertEqual(self.project.tmux_command, 'tmux')
 

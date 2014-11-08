@@ -4,6 +4,9 @@ pre: supervisorctl status my_service
 pre_window: source env/bin/activate
 tmux_options: "     -f ~/.tmux.testing.conf"
 socket_name: foo
+environment:
+  FOO: bar
+  BAR:
 windows:
   - editor:
       pre:

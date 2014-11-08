@@ -76,6 +76,10 @@ class Project(object):
         return self._get_config('pre_window')
 
     @property
+    def environment(self):
+        return self._get_config('environment', {})
+
+    @property
     def tmux_command(self):
         return self._get_config('tmux_command', 'tmux')
 
